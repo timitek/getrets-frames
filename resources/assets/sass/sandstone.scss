@@ -1,0 +1,26 @@
+/*
+elixir((mix) => {
+    mix.sass([
+            '../../themes/getrealt/assets/sass/sandstone.scss'
+       ], './public/themes/getrealt/css/sandstone.css');
+});
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Packages
+|--------------------------------------------------------------------------
+*/
+
+@import "resources/assets/bootswatch/sandstone/variables";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "resources/assets/bootswatch/sandstone/bootswatch";
+
+@import url("./pace/yellow/pace-theme-loading-bar.css");
+
+/*
+|--------------------------------------------------------------------------
+| Base
+|--------------------------------------------------------------------------
+*/
+@import "resources/assets/sass/app";

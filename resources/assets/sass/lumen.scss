@@ -1,0 +1,26 @@
+/*
+elixir((mix) => {
+    mix.sass([
+            '../../themes/getrealt/assets/sass/lumen.scss'
+       ], './public/themes/getrealt/css/lumen.css');
+});
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Packages
+|--------------------------------------------------------------------------
+*/
+
+@import "resources/assets/bootswatch/lumen/variables";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "resources/assets/bootswatch/lumen/bootswatch";
+
+@import url("./pace/blue/pace-theme-loading-bar.css");
+
+/*
+|--------------------------------------------------------------------------
+| Base
+|--------------------------------------------------------------------------
+*/
+@import "resources/assets/sass/app";

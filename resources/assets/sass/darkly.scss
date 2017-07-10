@@ -1,0 +1,26 @@
+/*
+elixir((mix) => {
+    mix.sass([
+            '../../themes/getrealt/assets/sass/darkly.scss'
+       ], './public/themes/getrealt/css/darkly.css');
+});
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Packages
+|--------------------------------------------------------------------------
+*/
+
+@import "resources/assets/bootswatch/darkly/variables";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "resources/assets/bootswatch/darkly/bootswatch";
+
+@import url("./pace/blue/pace-theme-loading-bar.css");
+
+/*
+|--------------------------------------------------------------------------
+| Base
+|--------------------------------------------------------------------------
+*/
+@import "resources/assets/sass/app";

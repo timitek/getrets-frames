@@ -1,0 +1,26 @@
+/*
+elixir((mix) => {
+    mix.sass([
+            '../../themes/getrealt/assets/sass/paper.scss'
+       ], './public/themes/getrealt/css/paper.css');
+});
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Packages
+|--------------------------------------------------------------------------
+*/
+
+@import "resources/assets/bootswatch/paper/variables";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "resources/assets/bootswatch/paper/bootswatch";
+
+@import url("./pace/blue/pace-theme-loading-bar.css");
+
+/*
+|--------------------------------------------------------------------------
+| Base
+|--------------------------------------------------------------------------
+*/
+@import "resources/assets/sass/app";

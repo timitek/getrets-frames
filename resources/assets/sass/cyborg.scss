@@ -1,0 +1,26 @@
+/*
+elixir((mix) => {
+    mix.sass([
+            '../../themes/getrealt/assets/sass/cyborg.scss'
+       ], './public/themes/getrealt/css/cyborg.css');
+});
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Packages
+|--------------------------------------------------------------------------
+*/
+
+@import "resources/assets/bootswatch/cyborg/variables";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "resources/assets/bootswatch/cyborg/bootswatch";
+
+@import url("./pace/white/pace-theme-loading-bar.css");
+
+/*
+|--------------------------------------------------------------------------
+| Base
+|--------------------------------------------------------------------------
+*/
+@import "resources/assets/sass/app";

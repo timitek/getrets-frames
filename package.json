@@ -1,0 +1,38 @@
+{
+  "name": "getrets-frames",
+  "version": "1.0.0",
+  "description": "A framed solution for consuming getrets data",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0"
+  },
+  "devDependencies": {
+    "gulp-uglify": "^2.0.1"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timitek/getrets-frames.git"
+  },
+  "keywords": [
+    "GetRETS",
+    "Larvel",
+    "IDX",
+    "RETS",
+    "Real",
+    "Estate"
+  ],
+  "author": "josh@timitek.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/timitek/getrets-frames/issues"
+  },
+  "homepage": "https://github.com/timitek/getrets-frames#readme"
+}
