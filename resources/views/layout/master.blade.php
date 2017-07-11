@@ -1,4 +1,7 @@
 <!doctype html>
+@php
+    $cssTheme = (empty($theme) ? 'sandstone' : $theme);
+@endphp
 
 <html lang="en" ng-app="getrealt">
     <head>
@@ -9,7 +12,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="/css/sandstone.css">
+        <link rel="stylesheet" type="text/css" href="/css/{{$cssTheme}}.css">
         <link rel="stylesheet" type="text/css" href="/flexslider/flexslider.css">
         <script type="text/javascript" data-pace-options='{ "startOnPageLoad": false }' src="/js/pace.min.js"></script>
         @yield('stylesheets')

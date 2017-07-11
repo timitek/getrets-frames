@@ -72,6 +72,7 @@
     };
 
     var searchWidget = function ($scope, eventFactory, listingService) {
+        $scope.showSearchBox = true;
 
         // Input variables
         $scope.advancedSearch = false;
@@ -100,6 +101,17 @@
                     eventFactory.searchingListings(false);
                     eventFactory.refreshListings($scope.listings);
                 });
+            }
+        };
+
+        $scope.start = function(params) {
+            if (params) {
+                $scope.showSearchBox = params.showSearchBox;
+                $scope.advancedSearch = params.advancedSearch;
+                $scope.keywords = params.keywords;
+                $scope.minPrice = params.minPrice;
+                $scope.maxPrice = params.maxPrice;
+                $scope.search();
             }
         };
     };

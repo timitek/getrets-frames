@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use GetRETS;
+use Illuminate\Http\Request;
 
 class ListingsController extends ApiController
 {

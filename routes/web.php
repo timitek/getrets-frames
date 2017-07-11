@@ -16,4 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('/listings', 'ListingsController@all');
+Route::post('/listings', 'ListingsController@search');
 Route::get('/listings/{id}', 'ListingsController@show');

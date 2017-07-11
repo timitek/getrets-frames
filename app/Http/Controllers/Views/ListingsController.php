@@ -4,16 +4,21 @@ namespace App\Http\Controllers\Views;
 
 use GetRETS;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Views\Models\PageParams;
 
 class ListingsController extends ViewController
 {
+    private $request = null;
+    private $theme = 'sandstone';
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
+        $this->request = $request;
+        $this->theme = (isset($this->request->theme) ? $this->request->theme : $this->theme);
         // $this->middleware('subscribed');
     }
 
@@ -23,7 +28,38 @@ class ListingsController extends ViewController
      * @return Response
      */
     public function all() {
-        return view('listings.all');
+        $searchParams = [
+                    'showSearchBox' => true,
+                ];
+
+        $params = new PageParams();
+        $params->setStartupParameters([
+                    $searchParams,
+                ]);
+                
+        return view('listings.all', ['theme' => $this->theme, 'params' => $params]);
+    }
+
+    /**
+     * Display the default listings page.
+     *
+     * @return Response
+     */
+    public function search() {
+        $searchParams = [
+                    'showSearchBox' => false,
+                    'advancedSearch' => boolval($this->request->advancedSearch),
+                    'keywords' => $this->request->keywords,
+                    'minPrice' => intval(str_replace(',', '', $this->request->minPrice)),
+                    'maxPrice' => intval(str_replace(',', '', $this->request->maxPrice)),
+                ];
+
+        $params = new PageParams();
+        $params->setStartupParameters([
+                    $searchParams,
+                ]);
+                
+        return view('listings.all', ['theme' => $this->theme, 'params' => $params]);
     }
 
     /**
@@ -52,6 +88,6 @@ class ListingsController extends ViewController
             abort(404);
         }
         
-        return view('listings.show', ['listing' => $listing, 'headerImage' => $headerImage]);
+        return view('listings.show', ['theme' => $this->theme, 'listing' => $listing, 'headerImage' => $headerImage]);
     }
 }
