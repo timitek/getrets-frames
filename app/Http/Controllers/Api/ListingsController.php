@@ -35,6 +35,21 @@ class ListingsController extends ApiController
             if (!empty($this->request->advancedSearch) && $this->request->advancedSearch) {
                 $data = GetRETS::getListing()
                         ->search($preparedKeywords, $this->request->maxPrice, $this->request->minPrice, $this->request->includeResidential, $this->request->includeLand, $this->request->includeCommercial);
+                
+                if ($this->request->beds) {
+                    $beds = $this->request->beds;
+                    $data = collect($data)->filter(function ($value, $key) use ($beds) {
+                        return $value->beds >= $beds;
+                    })->values()->all();
+                }
+                
+                if ($this->request->baths) {
+                    $baths = $this->request->baths;
+                    $data = collect($data)->filter(function ($value, $key) use ($baths) {
+                        return $value->baths >= $baths;
+                    })->values()->all();
+                }
+
                 $this->addThumbnails($data);
                 $output = $this->respondData($data);
             } else {

@@ -42,7 +42,7 @@
         <!-- Right Side -->
         <div class="{{ $listing->photoCount > 0 ? 'col-md-4' : 'col-xs-12' }}">
 
-            
+            <!--
             <h5 class="listing-heading"><i class="fa fa-link"></i> <strong>ID:</strong> {{ $listing->listingID }}</h5>
             <div class="listing-actions">
                 <button class="btn btn-primary" ng-click="contactAgent()">
@@ -50,7 +50,8 @@
                 </button>
             </div>
             <hr />
-
+            -->
+            
             <div class="listing-result">
                 <div class="listing-result-attributes">
                     <div>

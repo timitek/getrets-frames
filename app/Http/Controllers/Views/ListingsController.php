@@ -10,6 +10,7 @@ class ListingsController extends ViewController
 {
     private $request = null;
     private $theme = 'sandstone';
+
     /**
      * Create a new controller instance.
      *
@@ -23,21 +24,71 @@ class ListingsController extends ViewController
     }
 
     /**
-     * Display the default listings page.
+     * Returns an array of the search parameters specified on the request
      *
-     * @return Response
+     * @return array
      */
-    public function all() {
-        $searchParams = [
-                    'showSearchBox' => true,
-                ];
+    private function getParams() {
+        $searchParams = [];
 
-        $params = new PageParams();
-        $params->setStartupParameters([
-                    $searchParams,
-                ]);
-                
-        return view('listings.all', ['theme' => $this->theme, 'params' => $params]);
+        if (isset($this->request->advancedSearch)) {
+            $searchParams['advancedSearch'] = boolval($this->request->advancedSearch);
+        }
+
+        if (isset($this->request->keywords)) {
+            $searchParams['keywords'] = $this->request->keywords;
+        }
+
+        if (isset($this->request->minPrice)) {
+            $searchParams['minPrice'] = intval(str_replace(',', '', $this->request->minPrice));
+        }
+
+        if (isset($this->request->maxPrice)) {
+            $searchParams['maxPrice'] = intval(str_replace(',', '', $this->request->maxPrice));
+        }
+
+        if (isset($this->request->includeResidential)) {
+            $searchParams['includeResidential'] = boolval($this->request->includeResidential);
+        }
+
+        if (isset($this->request->includeLand)) {
+            $searchParams['includeLand'] = boolval($this->request->includeLand);
+        }
+
+        if (isset($this->request->includeCommercial)) {
+            $searchParams['includeCommercial'] = boolval($this->request->includeCommercial);
+        }
+
+        if (isset($this->request->propertyType)) {
+            $searchParams['includeCommercial'] = false;
+            $searchParams['includeLand'] = false;
+            $searchParams['includeResidential'] = false;
+            
+            switch (strtolower($this->request->propertyType)) {
+                case 'commercial':
+                    $searchParams['includeCommercial'] = true;
+                    break;
+                case 'land':
+                    $searchParams['includeLand'] = true;
+                    break;
+                case 'residential':
+                default:
+                    $searchParams['includeResidential'] = true;
+                    break;
+            }
+        }
+
+        if (isset($this->request->beds)) {
+            $searchParams['beds'] = floatval($this->request->beds);
+        }
+
+        if (isset($this->request->baths)) {
+            $searchParams['baths'] = floatval($this->request->baths);
+        }
+        
+        $searchParams['showSearchBox'] = (count($searchParams) <= 0);
+
+        return $searchParams;
     }
 
     /**
@@ -45,18 +96,10 @@ class ListingsController extends ViewController
      *
      * @return Response
      */
-    public function search() {
-        $searchParams = [
-                    'showSearchBox' => false,
-                    'advancedSearch' => boolval($this->request->advancedSearch),
-                    'keywords' => $this->request->keywords,
-                    'minPrice' => intval(str_replace(',', '', $this->request->minPrice)),
-                    'maxPrice' => intval(str_replace(',', '', $this->request->maxPrice)),
-                ];
-
+    public function all() {
         $params = new PageParams();
         $params->setStartupParameters([
-                    $searchParams,
+                    $this->getParams(),
                 ]);
                 
         return view('listings.all', ['theme' => $this->theme, 'params' => $params]);

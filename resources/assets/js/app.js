@@ -8,7 +8,7 @@
 
     var listingService = function ($q, $http, restService) {
 
-        this.index = function (advancedSearch, keywords, minPrice, maxPrice, includeResidential, includeLand, includeCommercial) {
+        this.index = function (advancedSearch, keywords, minPrice, maxPrice, includeResidential, includeLand, includeCommercial, beds, baths) {
             var deferred = $q.defer();
 
             var params = {
@@ -22,6 +22,9 @@
                 params.includeResidential = includeResidential;
                 params.includeLand = includeLand;
                 params.includeCommercial = includeCommercial;
+
+                params.beds = beds;
+                params.baths = baths;
             }
 
             restService.go({
@@ -83,6 +86,9 @@
         $scope.includeLand = true;
         $scope.includeCommercial = true;
 
+        $scope.beds = 0;
+        $scope.baths = 0;
+
         $scope.listings = null;
 
         $scope.search = function () {
@@ -95,7 +101,9 @@
                         $scope.maxPrice,
                         $scope.includeResidential,
                         $scope.includeLand,
-                        $scope.includeCommercial
+                        $scope.includeCommercial,
+                        $scope.beds,
+                        $scope.baths,
                         ).then(function (data) {
                     $scope.listings = data;
                     eventFactory.searchingListings(false);
@@ -111,6 +119,11 @@
                 $scope.keywords = params.keywords;
                 $scope.minPrice = params.minPrice;
                 $scope.maxPrice = params.maxPrice;
+                $scope.includeResidential = params.includeResidential;
+                $scope.includeLand = params.includeLand;
+                $scope.includeCommercial = params.includeCommercial;
+                $scope.beds = params.beds;
+                $scope.baths = params.baths;
                 $scope.search();
             }
         };
