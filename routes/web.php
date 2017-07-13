@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ListingsController@all');
+Route::post('/', 'ListingsController@all');
 
 Route::get('/listings', 'ListingsController@all');
 Route::post('/listings', 'ListingsController@all');
