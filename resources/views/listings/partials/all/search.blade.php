@@ -1,4 +1,4 @@
-<div class="well well-lg" ng-controller="searchWidget"
+<div class="well well-lg ng-cloak" ng-controller="searchWidget"
     ng-init='start({!! str_replace("'", "\u0027", implode(", ", $params->startupParameters)) !!})' ng-show="showSearchBox">
     <form>
         <span ng-show="advancedSearch" class="label label-primary pull-right pointer ng-cloak" ng-click="advancedSearch = false"><i class="fa fa-arrow-circle-up"></i> Simple Search</span>

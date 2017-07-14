@@ -74,7 +74,7 @@
         };
     };
 
-    var searchWidget = function ($scope, eventFactory, listingService) {
+    var searchWidget = function ($scope, $timeout, eventFactory, listingService) {
         $scope.showSearchBox = true;
 
         // Input variables
@@ -91,7 +91,18 @@
 
         $scope.listings = null;
 
+        $scope.messageParent = function (listings) {
+            $timeout(function () {
+                window.parent.postMessage({
+                    listings: listings, 
+                    height: document.body.clientHeight
+                }, '*');
+            }, 10);
+        };
+
         $scope.search = function () {
+            $scope.listings = null;
+            $scope.messageParent(null);
             if ($scope.advancedSearch || $scope.keywords) {
                 eventFactory.searchingListings(true);
                 listingService.index(
@@ -108,6 +119,7 @@
                     $scope.listings = data;
                     eventFactory.searchingListings(false);
                     eventFactory.refreshListings($scope.listings);
+                    $scope.messageParent(data);
                 });
             }
         };
@@ -172,12 +184,24 @@
 
     };
 
-    var listingDetails = function ($scope, $uibModal, listingService) {
+    var listingDetails = function ($scope, $uibModal, $timeout, listingService) {
 
         $scope.listingSource = null;
         $scope.listingType = null;
         $scope.listingID = null;
         $scope.address = null;
+
+        $scope.messageParent = function () {
+            $timeout(function () {
+                window.parent.postMessage({
+                    listingSource: $scope.listingSource,
+                    listingType: $scope.listingType,
+                    listingID: $scope.listingID,
+                    address: $scope.address,
+                    height: document.body.clientHeight
+                }, '*');
+            }, 10);
+        };
 
         $scope.initMap = function () {
 
@@ -235,6 +259,8 @@
                             var styles = [{"featureType": "administrative", "stylers": [{"visibility": "off"}]}, {"featureType": "poi", "stylers": [{"visibility": "simplified"}]}, {"featureType": "road", "elementType": "labels", "stylers": [{"visibility": "simplified"}]}, {"featureType": "water", "stylers": [{"visibility": "simplified"}]}, {"featureType": "transit", "stylers": [{"visibility": "simplified"}]}, {"featureType": "landscape", "stylers": [{"visibility": "simplified"}]}, {"featureType": "road.highway", "stylers": [{"visibility": "off"}]}, {"featureType": "road.local", "stylers": [{"visibility": "on"}]}, {"featureType": "road.highway", "elementType": "geometry", "stylers": [{"visibility": "on"}]}, {"featureType": "water", "stylers": [{"color": "#84afa3"}, {"lightness": 52}]}, {"stylers": [{"saturation": -17}, {"gamma": 0.36}]}, {"featureType": "transit.line", "elementType": "geometry", "stylers": [{"color": "#3f518c"}]}];
 
                             map.set('styles', styles);
+
+                            $scope.messageParent();
 
                         } else {
                             //alert("No results found");
@@ -326,6 +352,8 @@
             google.maps.event.addDomListener(window, 'load', $scope.initMap);
             
             $scope.initSliders();
+
+            $scope.messageParent();
         };
 
     };
@@ -368,9 +396,9 @@
     angular.module('getrealt', ['getrealt.rest', 'ui.bootstrap'])
         .factory('eventFactory', ['$rootScope', eventFactory])
         .service('listingService', ['$q', '$http', 'restService', listingService])
-        .controller('searchWidget', ['$scope', 'eventFactory', 'listingService', searchWidget])
+        .controller('searchWidget', ['$scope', '$timeout', 'eventFactory', 'listingService', searchWidget])
         .controller('listingsWidget', ['$scope', 'eventFactory', listingsWidget])
-        .controller('listingDetails', ['$scope', '$uibModal', 'listingService', listingDetails])
+        .controller('listingDetails', ['$scope', '$uibModal', '$timeout', 'listingService', listingDetails])
         .controller('contactAgentModal', ['$scope', '$uibModalInstance', 'parentController', contactAgentModal])
         .controller('messageConfirmationModal', ['$scope', '$uibModalInstance', 'message', messageConfirmationModal])
         .directive('ngEnter', function () {

@@ -10,6 +10,7 @@ class ListingsController extends ViewController
 {
     private $request = null;
     private $theme = 'sandstone';
+    private $linkTarget = '_blank';
 
     /**
      * Create a new controller instance.
@@ -20,6 +21,7 @@ class ListingsController extends ViewController
     {
         $this->request = $request;
         $this->theme = (isset($this->request->theme) ? $this->request->theme : $this->theme);
+        $this->linkTarget = (isset($this->request->linkTarget) ? $this->request->linkTarget : $this->linkTarget);
         // $this->middleware('subscribed');
     }
 
@@ -102,7 +104,11 @@ class ListingsController extends ViewController
                     $this->getParams(),
                 ]);
                 
-        return view('listings.all', ['theme' => $this->theme, 'params' => $params]);
+        return view('listings.all', [
+                'theme' => $this->theme, 
+                'linkTarget' => $this->linkTarget,
+                'params' => $params
+            ]);
     }
 
     /**
@@ -131,6 +137,11 @@ class ListingsController extends ViewController
             abort(404);
         }
         
-        return view('listings.show', ['theme' => $this->theme, 'listing' => $listing, 'headerImage' => $headerImage]);
+        return view('listings.show', [
+                'theme' => $this->theme, 
+                'linkTarget' => $this->linkTarget,
+                'listing' => $listing, 
+                'headerImage' => $headerImage
+            ]);
     }
 }

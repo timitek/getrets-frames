@@ -5,7 +5,7 @@
     <div class="row" ng-if="listings && listings.length">
         <div class="col-xs-12 col-sm-6 col-lg-4" ng-repeat-start="listing in listings">
             <div class="thumbnail listing-result animated bounceInDown">
-                <a ng-href="/listings/@{{listing.listingTypeURLSlug}}_@{{listing.id}}?theme={{$cssTheme}}" target="_blank" alt="View Details">
+                <a ng-href="/listings/@{{listing.listingTypeURLSlug}}_@{{listing.id}}?theme={{$cssTheme}}" target="{{$linkTarget}}" alt="View Details">
                     <img class="listing-result-img" ng-src="@{{listing.thumbnail}}?newWidth=242&maxHeight=200" alt="...">
                 </a>
                 <div class="caption">
