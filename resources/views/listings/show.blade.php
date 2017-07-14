@@ -2,6 +2,14 @@
 
 @section('content')
 
+<section class="parallax-heading ng-cloak" 
+         style="background: url('<?= $headerImage ?>') no-repeat center <?= $initialY ?>px fixed;">
+    <div class="jumbotron">
+        <h1><?= $listing->address ?></h1>
+    </div>
+</section>
+
+
 <div class="container" ng-controller="listingDetails" ng-init='start("{{ $listing->listingSourceURLSlug }}", "{{ $listing->listingTypeURLSlug }}", "{{ $listing->listingID }}", "{!! str_replace("'", "\u0027", $listing->address) !!}" )'>
 
     <!-- Featured Listings -->

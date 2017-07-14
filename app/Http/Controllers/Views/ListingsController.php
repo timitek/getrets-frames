@@ -141,7 +141,8 @@ class ListingsController extends ViewController
                 'theme' => $this->theme, 
                 'linkTarget' => $this->linkTarget,
                 'listing' => $listing, 
-                'headerImage' => $headerImage
+                'headerImage' => $headerImage,
+                'initialY' => (rand(0, 400) * -1)
             ]);
     }
 }
