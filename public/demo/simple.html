@@ -23,7 +23,7 @@
 
     <script type="text/javascript">
         window.addEventListener('message', function (event) {
-            if (~event.origin.indexOf('http://localhost:8000')) {
+            if (~event.origin.indexOf('http://frames.timitek.com')) {
                 document.getElementById('listingsFrame').height = parseInt(event.data.height) + 60;
             } else {
                 // The data didn't come from timitek
@@ -45,7 +45,7 @@
             </p>
         </div>
 
-        <form action="http://localhost:8000" target="listingsFrame" method="post">
+        <form action="http://frames.timitek.com" target="listingsFrame" method="post">
 
             <input type='hidden' name='advancedSearch' value='1' />
 
