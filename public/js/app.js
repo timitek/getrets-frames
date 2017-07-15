@@ -8,7 +8,7 @@
 
     var listingService = function ($q, $http, restService) {
 
-        this.index = function (customerKey, advancedSearch, keywords, minPrice, maxPrice, includeResidential, includeLand, includeCommercial, beds, baths) {
+        this.index = function (customerKey, advancedSearch, keywords, extra, minPrice, maxPrice, includeResidential, includeLand, includeCommercial, beds, baths) {
             var deferred = $q.defer();
 
             var params = {
@@ -18,6 +18,9 @@
             if (advancedSearch) {
                 if (customerKey) {
                     params.customerKey = customerKey;
+                }
+                if (extra) {
+                    params.extra = extra;
                 }
                 params.advancedSearch = advancedSearch;
                 params.minPrice = minPrice;
@@ -84,6 +87,7 @@
         $scope.customerKey = null;
         $scope.advancedSearch = false;
         $scope.keywords = null;
+        $scope.extra = null;
         $scope.minPrice = null;
         $scope.maxPrice = null;
         $scope.includeResidential = true;
@@ -113,6 +117,7 @@
                         $scope.customerKey,
                         $scope.advancedSearch,
                         $scope.keywords,
+                        $scope.extra,
                         $scope.minPrice,
                         $scope.maxPrice,
                         $scope.includeResidential,
@@ -135,6 +140,7 @@
                 $scope.showSearchBox = params.showSearchBox;
                 $scope.advancedSearch = params.advancedSearch;
                 $scope.keywords = params.keywords;
+                $scope.extra = params.extra;
                 $scope.minPrice = params.minPrice;
                 $scope.maxPrice = params.maxPrice;
                 $scope.includeResidential = params.includeResidential;

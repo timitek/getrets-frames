@@ -68,6 +68,22 @@ class ListingsController extends ApiController
                     })->values()->all();
                 }
 
+                // TODO: Fix this so it's actually searching all the fields and is done on the API not on the consumer PHP side.
+                if ($this->request->extra) {
+                    $extra = $this->request->extra;
+                    $data = collect($data)->filter(function ($value, $key) use ($extra) {
+                        $found = false;
+                        foreach(explode(",", $extra) as $item) {
+                            $position = stripos($value->address, $item);
+                            $found = ($position !== false);
+                            if ($found) {
+                                break;
+                            }
+                        }
+                        return $found;
+                    })->values()->all();
+                }
+
                 $this->addThumbnails($data);
                 $output = $this->respondData($data);
             } else {

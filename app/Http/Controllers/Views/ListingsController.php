@@ -47,6 +47,10 @@ class ListingsController extends ViewController
             $searchParams['keywords'] = $this->request->keywords;
         }
 
+        if (isset($this->request->extra)) {
+            $searchParams['extra'] = $this->request->extra;
+        }
+
         if (isset($this->request->minPrice)) {
             $searchParams['minPrice'] = intval(str_replace(',', '', $this->request->minPrice));
         }
@@ -109,7 +113,7 @@ class ListingsController extends ViewController
         $params->setStartupParameters([
                     $this->getParams(),
                 ]);
-                
+
         return view('listings.all', [
                 'customerKey' => $this->customerKey,
                 'theme' => $this->theme, 
