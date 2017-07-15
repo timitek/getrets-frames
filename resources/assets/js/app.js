@@ -22,15 +22,30 @@
                 if (extra) {
                     params.extra = extra;
                 }
-                params.advancedSearch = advancedSearch;
-                params.minPrice = minPrice;
-                params.maxPrice = maxPrice;
-                params.includeResidential = includeResidential;
-                params.includeLand = includeLand;
-                params.includeCommercial = includeCommercial;
-
-                params.beds = beds;
-                params.baths = baths;
+                if (advancedSearch) {
+                    params.advancedSearch = advancedSearch;
+                }
+                if (minPrice) {
+                    params.minPrice = minPrice;
+                }
+                if (maxPrice) {
+                    params.maxPrice = maxPrice;
+                }
+                if (includeResidential) {
+                    params.includeResidential = includeResidential;
+                }
+                if (includeLand) {
+                    params.includeLand = includeLand;
+                }
+                if (includeCommercial) {
+                    params.includeCommercial = includeCommercial;
+                }
+                if (beds) {
+                    params.beds = beds;
+                }
+                if (baths) {
+                    params.baths = baths;
+                }
             }
 
             restService.go({

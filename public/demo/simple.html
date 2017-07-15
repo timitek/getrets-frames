@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Simple Example</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        window.addEventListener('message', function (event) {
+            if (~event.origin.indexOf('http://localhost:8000')) {
+                document.getElementById('listingsFrame').height = parseInt(event.data.height) + 60;
+            } else {
+                // The data didn't come from timitek
+                return;
+            }
+        });
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Simple Example</h1>
+            <p>
+                This is just a simple example to demonstrate the how to use the frames.<br />
+                Most of these fields should be created as hidden input fields.  
+                Only expose certain fields for your users.
+            </p>
+        </div>
+
+        <form action="http://localhost:8000" target="listingsFrame" method="post">
+
+            <input type='hidden' name='advancedSearch' value='1' />
+
+            <div class="form-group">
+                <label for="customerKey">Customer Key</label>
+                <input class="form-control" id="customerKey" name="customerKey" placeholder="Customer key provided by timitek (in production use a hidden input)" value="aspirerealty" />
+            </div>
+            
+            <div class="form-group">
+                <label for="keywords">Keywords <small>(Address, listing id, etc..)</small></label>
+                <input class="form-control" id="keywords" name="keywords" placeholder="Address, listing id, etc.." value="Hot Springs Village, AR" />
+            </div>
+            
+            <div class="form-group">
+                <label for="extra">Extra <small>(useful for submitting check box options like "Golf" or "Lake")</small></label>
+                <input class="form-control" id="extra" name="extra" placeholder="Comma seperated list of additional words to search for" />
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <label for="minPrice">Min Price</label>
+                        <input type="number" class="form-control" id="minPrice" name="minPrice" value="0" />
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <label for="maxPrice">Max Price</label>
+                        <input type="number" class="form-control" id="maxPrice" name="maxPrice" value="100000" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <label for="beds">Beds</label>
+                        <input type="number" class="form-control" id="beds" name="beds" value="0" />
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <label for="baths">Baths</label>
+                        <input type="number" class="form-control" id="baths" name="baths" value="0" />
+                    </div>
+                </div>
+            </div>            
+            
+            <div class="form-group">
+                <label for="extra">Extra</label>
+                <input class="form-control" id="extra" name="extra" placeholder="Comma seperated list of additional words to search for" />
+            </div>
+            
+            <div class="form-group">
+                <label for="propertyType">Property Type</label>
+                <select class="form-control" id="propertyType" name="propertyType">
+                    <option value="" selected="selected">All Types</option>
+                    <option value="residential">Residential</option>
+                    <option value="commercial">Commercial</option>
+                    <option value="land">Land</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="theme">Theme</label>
+                <select class="form-control" id="theme" name="theme">
+                    <option value="cerulean">cerulean</option>
+                    <option value="cosmo">cosmo</option>
+                    <option value="custom">custom</option>
+                    <option value="cyborg">cyborg</option>
+                    <option value="darkly">darkly</option>
+                    <option value="flatly">flatly</option>
+                    <option value="journal">journal</option>
+                    <option value="lumen">lumen</option>
+                    <option value="paper">paper</option>
+                    <option value="readable">readable</option>
+                    <option value="sandstone" selected="selected">sandstone</option>
+                    <option value="simplex">simplex</option>
+                    <option value="slate">slate</option>
+                    <option value="spacelab">spacelab</option>
+                    <option value="superhero">superhero</option>
+                    <option value="united">united</option>
+                    <option value="yeti">yeti</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="linkTarget">Link Target <small>(can also be a seperate frame)</small></label>
+                <select class="form-control" id="linkTarget" name="linkTarget">
+                    <option value="_blank" selected="selected">_blank</option>
+                    <option value="_self">_self</option>
+                    <option value="_parent">_parent</option>
+                    <option value="_top">_top</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-default pull-right">Search</button>
+        </form>
+    </div>
+
+    <iframe id="listingsFrame" name="listingsFrame" src="" style="display: block; border: none; width: 100%;"></iframe>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

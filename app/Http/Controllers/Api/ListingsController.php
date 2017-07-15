@@ -54,14 +54,14 @@ class ListingsController extends ApiController
                 $data = $this->getRETS->getListing()
                         ->search($preparedKeywords, $this->request->maxPrice, $this->request->minPrice, $this->request->includeResidential, $this->request->includeLand, $this->request->includeCommercial);
                 
-                if ($this->request->beds) {
+                if ($this->request->beds && !empty($this->request->beds)) {
                     $beds = $this->request->beds;
                     $data = collect($data)->filter(function ($value, $key) use ($beds) {
                         return $value->beds >= $beds;
                     })->values()->all();
                 }
                 
-                if ($this->request->baths) {
+                if ($this->request->baths && !empty($this->request->baths)) {
                     $baths = $this->request->baths;
                     $data = collect($data)->filter(function ($value, $key) use ($baths) {
                         return $value->baths >= $baths;
@@ -69,7 +69,7 @@ class ListingsController extends ApiController
                 }
 
                 // TODO: Fix this so it's actually searching all the fields and is done on the API not on the consumer PHP side.
-                if ($this->request->extra) {
+                if ($this->request->extra && !empty($this->request->extra)) {
                     $extra = $this->request->extra;
                     $data = collect($data)->filter(function ($value, $key) use ($extra) {
                         $found = false;

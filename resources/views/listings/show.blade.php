@@ -125,7 +125,7 @@
     <div id="map" style="display: none"></div>
 
     <div class="row listing-result">
-        <div class="listing-result-provider"><strong>Provided By:</strong> {{ $listing->providedBy }}</div>
+        <div class="listing-result-provider"><strong>Broker Reciprocity:</strong> {{ $listing->providedBy }}</div>
     </div>
 
 </div>

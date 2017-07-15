@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Views;
 
-use GetRETS;
+use Timitek\GetRETS\GetRETS;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Views\Models\PageParams;
 
@@ -12,6 +12,7 @@ class ListingsController extends ViewController
     private $theme = 'sandstone';
     private $linkTarget = '_blank';
     private $customerKey = null;
+    private $getRETS = null;
 
     /**
      * Create a new controller instance.
@@ -24,6 +25,8 @@ class ListingsController extends ViewController
         $this->theme = (isset($this->request->theme) ? $this->request->theme : $this->theme);
         $this->linkTarget = (isset($this->request->linkTarget) ? $this->request->linkTarget : $this->linkTarget);
         $this->customerKey = (isset($this->request->customerKey) ? $this->request->customerKey : config('getrets.customer_key'));
+
+        $this->getRETS = new GetRETS($this->customerKey);
         // $this->middleware('subscribed');
     }
 
@@ -136,12 +139,12 @@ class ListingsController extends ViewController
         $listingType = $values[0];
         $listingId = $values[2];
         
-        $listing = GetRETS::getListing()->details($listingSource, $listingType, $listingId);
+        $listing = $this->getRETS->getListing()->details($listingSource, $listingType, $listingId);
 
         $headerImage = null;
         if ($listing->photoCount) {
             $randomPhoto = rand(0, $listing->photoCount - 1);
-            $headerImage = GetRETS::getListing()->imageUrl($listingSource, $listingType, $listingId, $randomPhoto, 1400, 1400);
+            $headerImage = $this->getRETS->getListing()->imageUrl($listingSource, $listingType, $listingId, $randomPhoto, 1400, 1400);
         }
                 
         if (empty($listing)) {

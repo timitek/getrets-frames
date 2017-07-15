@@ -5,7 +5,7 @@
     <div class="row" ng-if="listings && listings.length">
         <div class="col-xs-12 col-sm-6 col-lg-4" ng-repeat-start="listing in listings">
             <div class="thumbnail listing-result animated bounceInDown">
-                <a ng-href="/listings/@{{listing.listingTypeURLSlug}}_@{{listing.id}}?theme={{$cssTheme}}" target="{{$linkTarget}}" alt="View Details">
+                <a ng-href="/listings/@{{listing.listingTypeURLSlug}}_@{{listing.id}}?customerKey={{$customerKey}}&theme={{$cssTheme}}" target="{{$linkTarget}}" alt="View Details">
                     <img class="listing-result-img" ng-src="@{{listing.thumbnail}}?newWidth=242&maxHeight=200" alt="...">
                 </a>
                 <div class="caption">
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="listing-result-price"><span ng-bind="listing.listPrice"></span></div>
-                    <div class="listing-result-provider"><strong>Provided By:</strong> <span ng-bind="listing.providedBy"></span></div>
+                    <div class="listing-result-provider"><strong>Broker Reciprocity:</strong> <span ng-bind="listing.providedBy"></span></div>
                 </div>
             </div>
         </div>
