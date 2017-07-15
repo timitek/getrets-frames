@@ -11,6 +11,7 @@ class ListingsController extends ViewController
     private $request = null;
     private $theme = 'sandstone';
     private $linkTarget = '_blank';
+    private $customerKey = null;
 
     /**
      * Create a new controller instance.
@@ -22,6 +23,7 @@ class ListingsController extends ViewController
         $this->request = $request;
         $this->theme = (isset($this->request->theme) ? $this->request->theme : $this->theme);
         $this->linkTarget = (isset($this->request->linkTarget) ? $this->request->linkTarget : $this->linkTarget);
+        $this->customerKey = (isset($this->request->customerKey) ? $this->request->customerKey : config('getrets.customer_key'));
         // $this->middleware('subscribed');
     }
 
@@ -32,6 +34,10 @@ class ListingsController extends ViewController
      */
     private function getParams() {
         $searchParams = [];
+
+        if (isset($this->request->customerKey)) {
+            $searchParams['customerKey'] = $this->request->customerKey;
+        }
 
         if (isset($this->request->advancedSearch)) {
             $searchParams['advancedSearch'] = boolval($this->request->advancedSearch);
@@ -105,6 +111,7 @@ class ListingsController extends ViewController
                 ]);
                 
         return view('listings.all', [
+                'customerKey' => $this->customerKey,
                 'theme' => $this->theme, 
                 'linkTarget' => $this->linkTarget,
                 'params' => $params
@@ -138,6 +145,7 @@ class ListingsController extends ViewController
         }
         
         return view('listings.show', [
+                'customerKey' => $this->customerKey,
                 'theme' => $this->theme, 
                 'linkTarget' => $this->linkTarget,
                 'listing' => $listing, 

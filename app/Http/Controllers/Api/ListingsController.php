@@ -2,11 +2,29 @@
 
 namespace App\Http\Controllers\Api;
 
-use GetRETS;
+use Timitek\GetRETS\GetRETS;
 use Illuminate\Http\Request;
 
 class ListingsController extends ApiController
 {
+
+    private $getRETS = null;
+
+    /**
+     * Create a new ApiController reference
+     * 
+     * @param Request $request The request object is injected for use in 
+     * determining constraints of the request, such as the format the be used 
+     * for the response
+     */
+    public function __construct(Request $request) {
+        parent::__construct($request);
+
+        $customerKey = (isset($this->request->customerKey) ? $this->request->customerKey : config('getrets.customer_key'));
+
+        $this->getRETS = new GetRETS($customerKey);
+    }
+
     public function imageUrl($listingSource, $listingType, $listingId, $photoId, $width = null, $height = null) {
         $img = $this->getUrl() . '/api/' . $this->getCustomerKey() . '/' . $this->getSearchType() . '/Image/' . $listingSource . '/' . $listingType . '/' . $listingId . '/' . $photoId;
         if ($width) {
@@ -17,7 +35,7 @@ class ListingsController extends ApiController
 
     private function addThumbnails(array &$listings) {
         foreach ($listings as &$listing) {
-            $listing->thumbnail = GetRETS::getListing()
+            $listing->thumbnail = $this->getRETS->getListing()
                     ->imageUrl($listing->listingSourceURLSlug, $listing->listingTypeURLSlug, $listing->listingID, 0);
         }
     }
@@ -33,7 +51,7 @@ class ListingsController extends ApiController
         if (empty($output)) {
             $preparedKeywords = htmlspecialchars($this->request->keywords);
             if (!empty($this->request->advancedSearch) && $this->request->advancedSearch) {
-                $data = GetRETS::getListing()
+                $data = $this->getRETS->getListing()
                         ->search($preparedKeywords, $this->request->maxPrice, $this->request->minPrice, $this->request->includeResidential, $this->request->includeLand, $this->request->includeCommercial);
                 
                 if ($this->request->beds) {
@@ -54,7 +72,7 @@ class ListingsController extends ApiController
                 $output = $this->respondData($data);
             } else {
                 $preparedKeywords = htmlspecialchars($this->request->keywords);
-                $data = GetRETS::getListing()->searchByKeyword($preparedKeywords);
+                $data = $this->getRETS->getListing()->searchByKeyword($preparedKeywords);
                 $this->addThumbnails($data);
                 $output = $this->respondData($data);
             }

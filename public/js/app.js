@@ -8,7 +8,7 @@
 
     var listingService = function ($q, $http, restService) {
 
-        this.index = function (advancedSearch, keywords, minPrice, maxPrice, includeResidential, includeLand, includeCommercial, beds, baths) {
+        this.index = function (customerKey, advancedSearch, keywords, minPrice, maxPrice, includeResidential, includeLand, includeCommercial, beds, baths) {
             var deferred = $q.defer();
 
             var params = {
@@ -16,6 +16,9 @@
             };
 
             if (advancedSearch) {
+                if (customerKey) {
+                    params.customerKey = customerKey;
+                }
                 params.advancedSearch = advancedSearch;
                 params.minPrice = minPrice;
                 params.maxPrice = maxPrice;
@@ -78,6 +81,7 @@
         $scope.showSearchBox = true;
 
         // Input variables
+        $scope.customerKey = null;
         $scope.advancedSearch = false;
         $scope.keywords = null;
         $scope.minPrice = null;
@@ -106,6 +110,7 @@
             if ($scope.advancedSearch || $scope.keywords) {
                 eventFactory.searchingListings(true);
                 listingService.index(
+                        $scope.customerKey,
                         $scope.advancedSearch,
                         $scope.keywords,
                         $scope.minPrice,
@@ -126,6 +131,7 @@
 
         $scope.start = function(params) {
             if (params) {
+                $scope.customerKey = params.customerKey;
                 $scope.showSearchBox = params.showSearchBox;
                 $scope.advancedSearch = params.advancedSearch;
                 $scope.keywords = params.keywords;
