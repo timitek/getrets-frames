@@ -139,7 +139,7 @@
                         $scope.includeLand,
                         $scope.includeCommercial,
                         $scope.beds,
-                        $scope.baths,
+                        $scope.baths
                         ).then(function (data) {
                     $scope.listings = data;
                     eventFactory.searchingListings(false);
