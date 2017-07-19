@@ -19,4 +19,5 @@ Route::group([], function () {
     });
 
     Route::resource('listings', 'ListingsController', ['only' => ['index', 'show']]);
+    Route::post('/listings', 'ListingsController@index');
 });

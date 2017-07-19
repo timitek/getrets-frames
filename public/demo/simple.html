@@ -23,7 +23,7 @@
 
     <script type="text/javascript">
         window.addEventListener('message', function (event) {
-            if (~event.origin.indexOf('http://frames.timitek.com')) {
+            if (~event.origin.indexOf('http://localhost:8000')) {
                 document.getElementById('listingsFrame').height = parseInt(event.data.height) + 60;
             } else {
                 // The data didn't come from timitek
@@ -47,7 +47,7 @@
             </p>
         </div>
 
-        <form action="http://frames.timitek.com" target="listingsFrame" method="post">
+        <form action="http://localhost:8000" target="listingsFrame" method="post">
 
             <input type='hidden' name='advancedSearch' value='1' />
 
@@ -97,11 +97,6 @@
             </div>            
             
             <div class="form-group">
-                <label for="extra">Extra</label>
-                <input class="form-control" id="extra" name="extra" placeholder="Comma seperated list of additional words to search for" />
-            </div>
-            
-            <div class="form-group">
                 <label for="propertyType">Property Type</label>
                 <select class="form-control" id="propertyType" name="propertyType">
                     <option value="" selected="selected">All Types</option>
@@ -110,7 +105,33 @@
                     <option value="land">Land</option>
                 </select>
             </div>
-            
+
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <label for="sortBy">Sort By</label>
+                        <select class="form-control" id="sortBy" name="sortBy">
+                            <option value="listingSourceURLSlug">Source</option>
+                            <option value="listingTypeURLSlug">Property Type</option>
+                            <option value="address">Address</option>
+                            <option value="beds">Beds</option>
+                            <option value="baths">Baths</option>
+                            <option value="rawListPrice" selected="selected">Price</option>
+                            <option value="lot">Lot</option>
+                            <option value="acres">Acres</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="form-group">
+                        <label for="reverseSort">Reverse Sort</label>
+                        <div>
+                            <input type="checkbox" id="reverseSort" name="reverseSort" value="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="theme">Theme</label>
                 <select class="form-control" id="theme" name="theme">

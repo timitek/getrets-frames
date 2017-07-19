@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/css/{{$cssTheme}}.css">
         <link rel="stylesheet" type="text/css" href="/flexslider/flexslider.css">
-        <script type="text/javascript" data-pace-options='{ "startOnPageLoad": false }' src="/js/pace.min.js"></script>
+        <script type="text/javascript" data-pace-options='{ "startOnPageLoad": true, "ajax": { "trackMethods": ["GET", "POST"] } }' src="/js/pace.min.js"></script>
         @yield('stylesheets')
     </head>
 

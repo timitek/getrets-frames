@@ -8,7 +8,7 @@
 
     var listingService = function ($q, $http, restService) {
 
-        this.index = function (customerKey, advancedSearch, keywords, extra, minPrice, maxPrice, includeResidential, includeLand, includeCommercial, beds, baths) {
+        this.index = function (customerKey, advancedSearch, keywords, extra, minPrice, maxPrice, includeResidential, includeLand, includeCommercial, beds, baths, sortBy, reverseSort) {
             var deferred = $q.defer();
 
             var params = {
@@ -46,10 +46,17 @@
                 if (baths) {
                     params.baths = baths;
                 }
+                if (sortBy) {
+                    params.sortBy = sortBy;
+                }
+                if (reverseSort) {
+                    params.reverseSort = reverseSort;
+                }
             }
 
             restService.go({
                 url: '/api/listings',
+                method: 'POST',
                 params: params
             }).then(function (data) {
                 deferred.resolve(data.data);
@@ -105,9 +112,13 @@
         $scope.extra = null;
         $scope.minPrice = null;
         $scope.maxPrice = null;
+        $scope.beds = null;
+        $scope.baths = null;
         $scope.includeResidential = true;
         $scope.includeLand = true;
         $scope.includeCommercial = true;
+        $scope.sortBy = null;
+        $scope.reverseSort = false;
 
         $scope.beds = 0;
         $scope.baths = 0;
@@ -139,7 +150,9 @@
                         $scope.includeLand,
                         $scope.includeCommercial,
                         $scope.beds,
-                        $scope.baths
+                        $scope.baths,
+                        $scope.sortBy,
+                        $scope.reverseSort
                         ).then(function (data) {
                     $scope.listings = data;
                     eventFactory.searchingListings(false);
@@ -163,6 +176,8 @@
                 $scope.includeCommercial = params.includeCommercial;
                 $scope.beds = params.beds;
                 $scope.baths = params.baths;
+                $scope.sortBy = params.sortBy;
+                $scope.reverseSort = params.reverseSort;
                 $scope.search();
             }
         };

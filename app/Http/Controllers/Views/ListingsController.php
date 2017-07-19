@@ -100,6 +100,14 @@ class ListingsController extends ViewController
         if (isset($this->request->baths)) {
             $searchParams['baths'] = floatval($this->request->baths);
         }
+
+        if (isset($this->request->sortBy)) {
+            $searchParams['sortBy'] = $this->request->sortBy;
+        }
+
+        if (isset($this->request->reverseSort)) {
+            $searchParams['reverseSort'] = boolval($this->request->reverseSort);
+        }
         
         $searchParams['showSearchBox'] = (count($searchParams) <= 0);
 

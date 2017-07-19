@@ -51,39 +51,21 @@ class ListingsController extends ApiController
         if (empty($output)) {
             $preparedKeywords = htmlspecialchars($this->request->keywords);
             if (!empty($this->request->advancedSearch) && $this->request->advancedSearch) {
+                $sortBy = (isset($this->request->sortBy) ? $this->request->sortBy : 'rawListPrice');
+                $reverseSort = (isset($this->request->reverseSort) ? boolval($this->request->reverseSort) : false);
                 $data = $this->getRETS->getListing()
-                        ->search($preparedKeywords, $this->request->maxPrice, $this->request->minPrice, $this->request->includeResidential, $this->request->includeLand, $this->request->includeCommercial);
+                        ->setSortBy($sortBy)
+                        ->setReverseSort($reverseSort)
+                        ->search($preparedKeywords, 
+                                 $this->request->extra, 
+                                 $this->request->maxPrice, 
+                                 $this->request->minPrice, 
+                                 $this->request->beds, 
+                                 $this->request->baths, 
+                                 $this->request->includeResidential, 
+                                 $this->request->includeLand, 
+                                 $this->request->includeCommercial);
                 
-                if ($this->request->beds && !empty($this->request->beds)) {
-                    $beds = $this->request->beds;
-                    $data = collect($data)->filter(function ($value, $key) use ($beds) {
-                        return $value->beds >= $beds;
-                    })->values()->all();
-                }
-                
-                if ($this->request->baths && !empty($this->request->baths)) {
-                    $baths = $this->request->baths;
-                    $data = collect($data)->filter(function ($value, $key) use ($baths) {
-                        return $value->baths >= $baths;
-                    })->values()->all();
-                }
-
-                // TODO: Fix this so it's actually searching all the fields and is done on the API not on the consumer PHP side.
-                if ($this->request->extra && !empty($this->request->extra)) {
-                    $extra = $this->request->extra;
-                    $data = collect($data)->filter(function ($value, $key) use ($extra) {
-                        $found = false;
-                        foreach(explode(",", $extra) as $item) {
-                            $position = stripos($value->address, $item);
-                            $found = ($position !== false);
-                            if ($found) {
-                                break;
-                            }
-                        }
-                        return $found;
-                    })->values()->all();
-                }
-
                 $this->addThumbnails($data);
                 $output = $this->respondData($data);
             } else {
