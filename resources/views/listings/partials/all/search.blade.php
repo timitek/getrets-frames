@@ -32,6 +32,22 @@
                     </div>
                 </div>                        
 
+                <div class="col-xs-12 col-md-6 form-group">
+                    <label for="beds">Beds</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-bed"></i></span>
+                        <input type="number" class="form-control" id="beds" name="beds" placeholder="Minimum Beds" ng-model="beds">
+                    </div>
+                </div>                        
+
+                <div class="col-xs-12 col-md-6 form-group">
+                    <label for="baths">Baths</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-bath"></i></span>
+                        <input type="number" class="form-control" id="baths" name="baths" placeholder="Minimum Baths" ng-model="baths">
+                    </div>
+                </div>                        
+
                 <div class="col-xs-12">
                     <fieldset class="search-section">
                         <legend>Property Type</legend>
