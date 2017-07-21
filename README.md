@@ -17,6 +17,7 @@ A framed solution for consuming the GetRETS&reg; API from timitek (<http://www.t
 * [Development](#development)
   * [iframes](#iframes)
   * [Form Fields](#form-fields)
+  * [Field Names](#field-names)
 
 ***
 
@@ -106,9 +107,30 @@ Then create a form that will post to the frames server and targets your iframe.
 <form action="http://frames.timitek.com" target="listingsFrame" method="post">
 ```
 
+## Form Fields
+
 There are several fields you can provide on your form as either hidden input fields or as visible fields for your users to select in order to filter the listings you wish to search for.
 
-## Form Fields
+An example of a form field being used as a hidden field would be;
+
+```
+<input type='hidden' name='propertyType' value='residential' />
+```
+
+If you wish to make the field visible to users of your form, instead of making it a static unchangeable hidden field, you could create it like this;
+
+```
+<select id="propertyType" name="propertyType">
+    <option value="" selected="selected">All Types</option>
+    <option value="residential">Residential</option>
+    <option value="commercial">Commercial</option>
+    <option value="land">Land</option>
+</select>
+```
+
+## Field Names
+
+The list of available fields are;
 
 ***customerKey*** - If you have a custom frames server and provided a customer key in the .env file this is not necessary, but if you are using a frames server as a service, you will need to provide the customer key provided to you by <http://www.timitek.com>.
 
