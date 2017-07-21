@@ -18,6 +18,7 @@ A framed solution for consuming the GetRETS&reg; API from timitek (<http://www.t
   * [iframes](#iframes)
   * [Form Fields](#form-fields)
   * [Field Names](#field-names)
+  * [Frame Messages](#frame-messages)
 
 ***
 
@@ -165,3 +166,31 @@ The list of available fields are;
 ***theme*** - *(optional)* Changes the colors of the results and details pages.  The themes that are available for use are (cerulean, cosmo, custom, cyborg, darkly, flatly, journal, lumen, paper, readable, sandstone, simplex, slate, spacelab, superhero, united, yeti) and are provided by <http://www.bootswatch.com/>
 
 ***linkTarget*** - *(optional)* Specified how the listing details links will be created.  Follows the same rules as all href target's.  Example options are (_blank, _self, _parent, _top).
+
+## Frame Messages
+
+The framed site will broadcast a message with the listing details as well as the height of the frame to allow you resize it dynamically making it seamless to your users, that you are even using a framed solution.  You can listen for the message using window.addEventListener('message', function (event) {});
+
+The message contents will be 
+
+```
+{
+    listings: <the listing details>,
+    height: <the new height of the frame content>
+}
+```
+
+As a security measure you should ensure that the message came from the frame server by checking the origin of it to ensure it matches.  See the following example.
+
+```
+<script type="text/javascript">
+    window.addEventListener('message', function (event) {
+        if (~event.origin.indexOf('http://frames.timitek.com')) {
+            document.getElementById('listingsFrame').height = parseInt(event.data.height) + 60;
+        } else {
+            // The data didn't come from timitek
+            return;
+        }
+    });
+</script>
+```
