@@ -87,7 +87,7 @@ And then browsing to <http://localhost:8000/>
 
 This test will allow you to ensure that your settings are correct and that your frames server is running.
 
-A sample page that uses the frames server can be found at <http://localhost:8000/demo/sample.html>.  However, it needs to be modified, since by default this page is set to work against <http://frames.timitek.com>.  You will need to modify the references to frames.timitek.com to poing to your frames server.  These references can be found on line 26 and 50 of the sample html file.
+A sample page that uses the frames server can be found at <http://localhost:8000/demo/sample.html>.  However, it needs to be modified, since by default this page is set to work against <http://frames.timitek.com>.  You will need to modify the references to frames.timitek.com to point to your frames server.  These references can be found on line 26 and 50 of the sample html file.
 
 
 # Development
