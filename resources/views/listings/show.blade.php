@@ -25,7 +25,7 @@
                 <ul class="slides">
                     @for ($i = 0; $i < $listing->photoCount; $i++)
                     <li>
-                        <img class="carousel-img" src="{{ GetRETS::getListing()->imageUrl($listing->listingSourceURLSlug, $listing->listingTypeURLSlug, $listing->listingID, $i) }}" />
+                        <img class="carousel-img" src="{{ $getRETS->getListing()->imageUrl($listing->listingSourceURLSlug, $listing->listingTypeURLSlug, $listing->listingID, $i) }}" />
                     </li>
                     @endfor
                 </ul>
@@ -36,7 +36,7 @@
                 <ul class="slides">
                     @for ($i = 0; $i < $listing->photoCount; $i++)
                     <li>
-                        <img class="slider-img" src="{{ GetRETS::getListing()->imageUrl($listing->listingSourceURLSlug, $listing->listingTypeURLSlug, $listing->listingID, $i) }}" />
+                        <img class="slider-img" src="{{ $getRETS->getListing()->imageUrl($listing->listingSourceURLSlug, $listing->listingTypeURLSlug, $listing->listingID, $i) }}" />
                     </li>
                     @endfor
                 </ul>
@@ -125,7 +125,7 @@
     <div id="map" style="display: none"></div>
 
     <div class="row listing-result">
-        <div class="listing-result-provider"><strong>Broker Reciprocity:</strong> {{ $listing->providedBy }}</div>
+        <div class="listing-result-provider"><strong>Courtesy of:</strong> {{ $listing->providedBy }}</div>
     </div>
 
 </div>

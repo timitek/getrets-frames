@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="listing-result-price"><span ng-bind="listing.listPrice"></span></div>
-                    <div class="listing-result-provider"><strong>Broker Reciprocity:</strong> <span ng-bind="listing.providedBy"></span></div>
+                    <div class="listing-result-provider"><strong>Courtesy of:</strong> <span ng-bind="listing.providedBy"></span></div>
                 </div>
             </div>
         </div>
