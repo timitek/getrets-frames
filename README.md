@@ -110,6 +110,8 @@ There are several fields you can provide on your form as either hidden input fie
 
 ## Form Fields
 
+***customerKey*** - If you have a custom frames server and provided a customer key in the .env file this is not necessary, but if you are using a frames server as a service, you will need to provide the customer key provided to you by <http://www.timitek.com>.
+
 ***advancedSearch*** - A boolean field that needs to be set to true if you want to provide anything more than a keyword search
 
 ***keywords*** - Keywords to search on (address, listing id, etc...)
