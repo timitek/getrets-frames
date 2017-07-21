@@ -169,7 +169,7 @@ The list of available fields are;
 
 ## Frame Messages
 
-The framed site will broadcast a message with the listing details as well as the height of the frame to allow you resize it dynamically making it seamless to your users, that you are even using a framed solution.  You can listen for the message using window.addEventListener('message', function (event) {});
+The frames server will broadcast a message with the listing details as well as the height of the content on the page allowing you to resize your frame dynamically to create seamless experience for you are users, as well as perform other dynamic features on your parent site based on the listing data returned.  You can listen for the message using window.addEventListener('message', function (event) {});
 
 The message contents will be 
 
